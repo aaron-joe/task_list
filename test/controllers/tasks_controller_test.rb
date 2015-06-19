@@ -21,7 +21,7 @@ class TasksControllerTest < ActionController::TestCase
       post :create, task: { completed: @task.completed, due_on: @task.due_on, name: @task.name, order_number: @task.order_number, start_on: @task.start_on }
     end
 
-    assert_redirected_to task_path(assigns(:task))
+    assert_redirected_to tasks_path
   end
 
   test "should show task" do
