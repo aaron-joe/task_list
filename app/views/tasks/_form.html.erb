@@ -17,19 +17,14 @@
   </div>
   <div class="field">
     <%= f.label :start_on %><br>
-    <%= f.date_select :start_on %>
+    <%= f.date_field :start_on %>
   </div>
   <div class="field">
     <%= f.label :due_on %><br>
-    <%= f.date_select :due_on %>
+    <%= f.date_field :due_on %>
   </div>
   <div class="field">
-    <%= f.label :completed %><br>
-    <%= f.check_box :completed %>
-  </div>
-  <div class="field">
-    <%= f.label :order_number %><br>
-    <%= f.number_field :order_number %>
+    <%= f.hidden_field :completed, value: false %>
   </div>
   <div class="actions">
     <%= f.submit %>
