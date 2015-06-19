@@ -5,4 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Task.create!(name: "")
+5.times do |count|
+  Task.create!(name: Faker::Hacker.say_something_smart, start_on: Date.today,
+      due_on: Date.today+2.day, completed: false, order_number: count+1)
+end
