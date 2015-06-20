@@ -1,41 +1,45 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Tasks</h1>
-<table class="table table-bordered">
-<table>
-  <thead>
-    <tr>
-      <th>Order number</th>
-      <th>Name</th>
-      <th>Start on</th>
-      <th>Due on</th>
-      <th>Completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr id="<%= task.id %>">
-        <td id="order<%= task.id %>"<%= task.order_number %></td>
-        <td id="name"><%= task.name %></td>
-        <td id="start"><%= task.start_on %></td>
-        <td id="due"><%= task.due_on %></td>
-        <td id="completed<%= task.id %>"><%= (render partial: task, locals: {task: task}) %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= form_for task, remote: true do |f| %>
-          <%= f.check_box :completed, class: "complete-box" %>
-        <% end %></td>
-        <td>
-          <a href="#myModal<%= "#{task.id}" %>" data-toggle="modal">
-            'Edit'
-          </a>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Order number</th>
+        <th>Name</th>
+        <th>Start on</th>
+        <th>Due on</th>
+        <th>Completed</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-</table>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr id="<%= task.id %>">
+          <td id="order<%= task.id %>"><%= task.order_number %></td>
+          <td id="name"><%= task.name %></td>
+          <td id="start"><%= task.start_on %></td>
+          <td id="due"><%= task.due_on %></td>
+          <td id="completed<%= task.id %>">
+            <!-- <%= (render partial: task, locals: {task: task}) %></td> -->
+            <%= form_for task, remote: true do |f| %>
+              <%= f.check_box :completed, class: "complete-box" %>
+            <% end %>
+          </td>
+
+          <td><%= link_to 'Show', task %></td>
+          <td>
+            <a href="#myModal<%= "#{task}" %>" data-toggle="modal">
+              Edit
+            </a>
+          </td>
+          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% render partial: 'edit_task', locals: {task: task} %>
+
+      <% end %>
+    </tbody>
+  </table>
 <br>
 
 <%= link_to 'New Task', new_task_path %>

@@ -20,6 +20,9 @@ $(document).ready(function(){
   });
 });
 
-$('#myModal').on('show', function (e) {
-    if (!data) return e.preventDefault() // stops modal from being shown
-})
+// $('#myModal').on('show', function (e) {
+//     if (!data) return e.preventDefault() // stops modal from being shown
+// })
+// $('#myModal').on('shown.bs.modal', function () {
+//   $('#myInput').focus()
+// })
