@@ -23,9 +23,13 @@
         <td id="due"><%= task.due_on %></td>
         <td id="completed<%= task.id %>"><%= (render partial: task, locals: {task: task}) %></td>
         <td><%= link_to 'Show', task %></td>
-        <%= form_for task do |t| %>
-          <td><%= t.check_box :completed, remote: true, class: "complete-box" %></td>
-        <% end %>
+        <td><%= form_for task, remote: true do |f| %>
+          <%= f.check_box :completed, class: "complete-box" %>
+        <% end %></td>
+        <td>
+          <a href="#myModal<%= "#{task.id}" %>" data-toggle="modal">
+            'Edit'
+          </a>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
