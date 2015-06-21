@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/sortable
+//= require jquery-ui/effect-highlight
 //= require_tree .
 
 $(document).ready(function(){
@@ -26,3 +28,4 @@ $(document).ready(function(){
 // $('#myModal').on('shown.bs.modal', function () {
 //   $('#myInput').focus()
 // })
+//
