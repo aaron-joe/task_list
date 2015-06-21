@@ -25,8 +25,8 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    @tasks = Task.all
-    @task.order_number = @tasks.count + 1
+    @last_task = Task.rank(:order_number).last
+    @task.order_number = @last_task.order_number + 1
       if @task.save
         redirect_to tasks_path, notice: 'Task was successfully created.'
       else
