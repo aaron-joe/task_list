@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:update_order_position, :show, :edit, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.rank(:order_number).all
   end
 
   # GET /tasks/1
@@ -37,14 +37,10 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.update(task_params)
+      redirect_to root_path, notice: 'Task was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,6 +54,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_row_order
+    @task = Task.find(task_params[:task_id])
+    @task.order_number_position = task_params[:order_number_position]
+    @task.save
+
+    render nothing: true # this is a POST action, updates sent via AJAX, no view rendered
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -66,6 +70,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:id, :name, :start_on, :due_on, :completed, :order_number)
+      params.require(:task).permit(:task_id, :name, :start_on, :due_on, :completed, :order_number_position)
     end
 end
