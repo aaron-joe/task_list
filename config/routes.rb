@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'tasks#index'
+  get 'tasks/review'
   resources :tasks
   resources :tasks do
     post :update_row_order, on: :collection
