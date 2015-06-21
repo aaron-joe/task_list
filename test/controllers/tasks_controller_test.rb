@@ -36,7 +36,7 @@ class TasksControllerTest < ActionController::TestCase
 
   test "should update task" do
     patch :update, id: @task, task: { completed: @task.completed, due_on: @task.due_on, name: @task.name, order_number: @task.order_number, start_on: @task.start_on }
-    assert_redirected_to task_path(assigns(:task))
+    assert_redirected_to root_path
   end
 
   test "should destroy task" do

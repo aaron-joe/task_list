@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     if @task.update(task_params)
-      render partial: 'task', locals: {task: @task}
+      redirect_to root_path, notice: 'Task was successfully updated.'
     else
       render :edit
     end

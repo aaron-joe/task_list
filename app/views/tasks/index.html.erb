@@ -15,23 +15,18 @@
   <tbody id="sortable">
     <% @tasks.each do |task| %>
       <tr data-item-id="<%= "#{task.id}" %>" class="item">
-        <!-- <td id="order_number<%= task.id %>"><%= task.order_number %></td> -->
         <td id="name<%= task.id %>"><%= task.name %></td>
         <td id="start_on<%= task.id %>"><%= task.start_on %></td>
         <td id="due_on<%= task.id %>"><%= task.due_on %></td>
         <td id="completed<%= task.id %>">
-          <!-- <%= (render partial: task, locals: {task: task}) %></td> -->
           <%= form_for task, remote: true do |f| %>
             <%= f.check_box :completed, class: "complete-box" %>
           <% end %>
         </td>
-
+        <%= render partial: 'edit_task', locals: {task: task} %>
         <td><%= link_to 'Show', task %></td>
-        <td><%= form_for task, remote: true do |f| %>
-          <%= f.check_box :completed, class: "complete-box" %>
-        <% end %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% render partial: 'edit_task', locals: {task: task} %>
       </tr>
     <% end %>
   </tbody>
