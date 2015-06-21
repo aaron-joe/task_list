@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 
 ruby '2.2.1'
+
+#for sortable
+  gem 'ranked-model'
+  gem 'jquery-ui-rails'
+#
+gem 'bootstrap-sass', '~> 3.3.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use SCSS for stylesheets
