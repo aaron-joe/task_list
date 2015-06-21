@@ -4,9 +4,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.rank(:order_number).all
+    @tasks = Task.where(completed: false).rank(:order_number).all
   end
 
+  def review
+    @tasks = Task.where(completed: true).rank(:order_number).all
+  end
   # GET /tasks/1
   # GET /tasks/1.json
   def show
