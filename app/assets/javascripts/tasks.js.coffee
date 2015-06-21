@@ -24,7 +24,7 @@ jQuery ->
         position = ui.item.index()
         $.ajax(
           type: 'POST'
-          url: "/tasks/update_row_order"
+          url: '/tasks/update_row_order'
           dataType: 'json'
           data: { task: {id: item_id, order_number_position: position } }
         )
