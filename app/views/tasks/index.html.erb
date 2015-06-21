@@ -4,7 +4,6 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <!-- <th>Order number</th> -->
       <th>Name</th>
       <th>Start on</th>
       <th>Due on</th>
@@ -13,24 +12,11 @@
     </tr>
   </thead>
   <tbody id="sortable">
-    <% @tasks.each do |task| %>
-      <tr data-item-id="<%= "#{task.id}" %>" class="item">
-        <td id="name<%= task.id %>"><%= task.name %></td>
-        <td id="start_on<%= task.id %>"><%= task.start_on %></td>
-        <td id="due_on<%= task.id %>"><%= task.due_on %></td>
-        <td id="completed<%= task.id %>">
-          <%= form_for task, remote: true do |f| %>
-            <%= f.check_box :completed, class: "complete-box" %>
-          <% end %>
-        </td>
-        <%= render partial: 'edit_task', locals: {task: task} %>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <div id='all-tasks'><%= render @tasks %></div>
   </tbody>
 </table>
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<div id="new-form-container"></div>
+
+<%= link_to 'New Task', new_task_path, remote: true %>
