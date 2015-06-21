@@ -26,6 +26,6 @@ jQuery ->
           type: 'POST'
           url: 'http://localhost:3000/tasks/update_row_order'
           dataType: 'json'
-          data: { task: {task_id: item_id, order_number_position: position } }
+          data: { task: {id: item_id, order_number_position: position } }
         )
     )

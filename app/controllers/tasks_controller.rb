@@ -24,14 +24,10 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
     @last_task = Task.rank(:order_number).last
-    @task.order_number = @last_task.order_number + 1
-      if @task.save
-        redirect_to tasks_path, notice: 'Task was successfully created.'
-      else
-        render :new
-      end
+    @task = Task.create!(name: params[:task][:name], start_on: params[:task][:start_on],
+        due_on: params[:task][:due_on], completed: params[:task][:completed],
+        order_number:  @last_task.order_number + 1)
   end
 
   # PATCH/PUT /tasks/1
@@ -55,7 +51,7 @@ class TasksController < ApplicationController
   end
 
   def update_row_order
-    @task = Task.find(task_params[:task_id])
+    @task = Task.find(task_params[:id])
     @task.order_number_position = task_params[:order_number_position]
     @task.save
 
@@ -70,6 +66,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:task_id, :name, :start_on, :due_on, :completed, :order_number_position)
+      params.require(:task).permit(:id, :name, :start_on, :due_on, :completed, :order_number_position)
     end
 end
