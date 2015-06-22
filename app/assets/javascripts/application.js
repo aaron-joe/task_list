@@ -19,6 +19,6 @@
 $(document).ready(function(){
   $('.complete-box').click(function() {
     $(this).closest('form').submit();
-    $(this).closest('tr').hide();
+    $(this).closest('tr').fadeOut();
   });
 });
